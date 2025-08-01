@@ -1,18 +1,23 @@
 class Solution {
     public int maxProduct(int[] nums) {
+        int maxSoFar = nums[0], minSoFar = nums[0], result = nums[0];
 
-        HashSet<Integer> prev=new HashSet<>();
-        int max=Integer.MIN_VALUE;
+        for (int i = 1; i < nums.length; i++) {
+            int curr = nums[i];
+            
+            // Swap if negative
+            if (curr < 0) {
+                int temp = maxSoFar;
+                maxSoFar = minSoFar;
+                minSoFar = temp;
+            }
 
-        for(int i=0;i<nums.length;i++){
-            HashSet<Integer> curr=new HashSet<>();
-            curr.add(nums[i]);
-            max=Math.max(nums[i],max);
-            for(int j : prev){
-                curr.add(nums[i]*j);
-                max=Math.max(nums[i]*j,max);
-            }prev=curr;
+            maxSoFar = Math.max(curr, maxSoFar * curr);
+            minSoFar = Math.min(curr, minSoFar * curr);
+
+            result = Math.max(result, maxSoFar);
         }
-        return max;
+
+        return result;
     }
 }
