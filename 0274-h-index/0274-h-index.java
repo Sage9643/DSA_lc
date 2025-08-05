@@ -1,12 +1,15 @@
 class Solution {
     public int hIndex(int[] citations) {
-        int H=citations.length;
-        for(;H>0;H--){
-            int citation=0;
-            for(int i=0;i<citations.length;i++){
-                if(citations[i]>=H) citation++;
-                if(citation==H) return H;
-            }
-        }return H;
+        int count[]=new int[citations.length+1];
+        for(int citation:citations){
+            if(citation>=citations.length){
+                count[citations.length]++;
+            }else count[citation]++;
+        }
+        int total=0;
+        for(int i=count.length-1;i>=0;i--){
+            total+=count[i];
+            if(total>=i) return i;
+        }return 0;
     }
 }
