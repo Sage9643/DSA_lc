@@ -4,16 +4,16 @@ class Solution {
         for(int i=0;i<s.length();i++){
             map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
         }
-        ArrayList<Info> arr=new ArrayList<>();
+        PriorityQueue<Info> heap=new PriorityQueue<>((info1,info2)->info2.freq-info1.freq);
         for(Character key:map.keySet()){
-            arr.add(new Info(key,map.get(key)));
+            heap.add(new Info(key,map.get(key)));
         }
-        Collections.sort(arr,(info1,info2)-> info2.freq-info1.freq);
         StringBuilder sb=new StringBuilder();
-        for(int i=0;i<arr.size();i++){
-            while(arr.get(i).freq!=0){
-                sb.append(arr.get(i).ch);
-                arr.get(i).freq--;
+        while(!heap.isEmpty()){
+            Info el=heap.remove();
+            while(el.freq!=0){
+                sb.append(el.ch);
+                el.freq--;
             }
         }return sb.toString();
     }
