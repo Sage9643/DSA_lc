@@ -1,16 +1,23 @@
 class Solution {
-    int arr[] ;
+    HashMap<Integer,List<Integer>> map=new HashMap<>();
     public Solution(int[] nums) {
-        arr=nums;
+        for(int i=0;i<nums.length;i++){
+            if(!map.containsKey(nums[i])){
+                List<Integer> index=new ArrayList<>();
+                index.add(i);
+                map.put(nums[i],index);
+            }else{
+                map.get(nums[i]).add(i);
+            }
+
+        }
     }
     
     public int pick(int target){
-        List<Integer> list=new ArrayList<>();
-        for(int i=0;i<arr.length;i++){
-            if(arr[i]==target) list.add(i);
-        }Random idx=new Random();
-        int randomIdx=idx.nextInt(list.size());
-        return list.get(randomIdx);
+        List<Integer> targetNum=map.get(target);
+        Random idx=new Random();
+        int randomIdx=idx.nextInt(targetNum.size());
+        return targetNum.get(randomIdx);
     }
 }
 
