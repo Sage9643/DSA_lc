@@ -1,22 +1,20 @@
 class MapSum {
     HashMap<String,Integer> map=new HashMap<>();
+    HashMap<String ,Integer> prefMap=new HashMap<>();
     public MapSum() {
         
     }
     public void insert(String key, int val) {
-        if(map.containsKey(key)) map.remove(key);
+        int diff=val-map.getOrDefault(key,0);
         map.put(key,val);
+        for(int i=1;i<=key.length();i++){
+            String keySubstr=key.substring(0,i);
+            prefMap.put(keySubstr,prefMap.getOrDefault(keySubstr,0)+diff);
+        }
     }
     
     public int sum(String prefix){
-        int sum=0;
-        for(String key:map.keySet()){
-            if(key.length()>=prefix.length()){
-                String prefixKey=key.substring(0,prefix.length());
-                if(prefixKey.equals(prefix)) sum+=map.get(key);
-            }
-        }return sum;
-        
+        return prefMap.getOrDefault(prefix,0);
     }
 }
 
