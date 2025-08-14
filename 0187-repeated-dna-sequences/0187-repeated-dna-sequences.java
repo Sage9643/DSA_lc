@@ -1,21 +1,17 @@
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
-        HashMap<String,Integer> DNACount=new HashMap<>();
+        HashSet<String> seenDNA=new HashSet<>();
+        HashSet<String> repeatingDNA=new HashSet<>();
+
         int i=0;
+
         while(i<=s.length()-10){
             String DNASeq=s.substring(i,i+10);
-            DNACount.put(DNASeq,DNACount.getOrDefault(DNASeq,0)+1);
+            if(!seenDNA.contains(DNASeq)) seenDNA.add(DNASeq);
+            else repeatingDNA.add(DNASeq);
             i++;
         }
-        HashSet<String> repeatingDNA=new HashSet<>();
-        i=0;
-        while(i<=s.length()-10){
-            String DNASeq=s.substring(i,i+10);
-            if(DNACount.get(DNASeq)>1)repeatingDNA.add(DNASeq);
-            i++;
-        }List<String> DNA=new ArrayList<>();
-        for(String dna:repeatingDNA) DNA.add(dna);
+        return new ArrayList<>(repeatingDNA);
 
-        return DNA;
     }
 }
