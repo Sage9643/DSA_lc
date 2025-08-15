@@ -11,7 +11,7 @@ class Solution {
             HashSet<Integer> subset=new HashSet<>();
             while(j<nums.length){
                 subset.add(nums[j]);
-                if(subset.size()==uniq) count++;
+                if(subset.size()==uniq) {count+=nums.length-j;break;}
                 j++;
             }i++;
         }
