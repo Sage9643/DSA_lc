@@ -7,16 +7,13 @@ class Solution {
             set.remove(moveFrom[i]);
             set.add(moveTo[i]);
         }
-        PriorityQueue<Integer> pq=new PriorityQueue<>();
-        for(int value:set) pq.add(value);
-
         List<Integer>ans=new ArrayList<>();
         int idx=0;
 
-        while(!pq.isEmpty()){
-            ans.add(pq.remove());
+        for(int num:set){
+            ans.add(num);
             idx++;
-        }
+        }Collections.sort(ans);
         return ans;
     }
 }
