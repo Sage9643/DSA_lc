@@ -5,7 +5,6 @@ class Solution {
         int left=0,right=s.length()-1;
         
         String vowels="aeiouAEIOU";
-        
         while(left<right) {
           
             while(left<right && vowels.indexOf(chars[left])==-1) {
