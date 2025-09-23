@@ -1,29 +1,21 @@
 class Solution {
     public int compareVersion(String version1, String version2) {
-        String ver1[]=version1.split("\\.");
-        String ver2[]=version2.split("\\.");
+        String arr1[]=version1.split("\\.");
+        String arr2[]=version2.split("\\.");
 
-        int smallest=ver1.length>ver2.length? ver2.length:ver1.length;
-
-        for(int i=0;i<smallest;i++){
-            if((Integer.parseInt(ver1[i]))>(Integer.parseInt(ver2[i]))){
-                return 1;
-            }else if((Integer.parseInt(ver1[i]))<(Integer.parseInt(ver2[i]))){
-                return -1;
-            }
-        }while(smallest<ver1.length){
-            if(Integer.parseInt(ver1[smallest])>0){
-                return 1;
-                
-            }smallest++;
+        int j=0;
+        int i=0;
+        for(;i<arr1.length && j<arr2.length;i++,j++){
+            if(Integer.valueOf(arr1[i])>Integer.valueOf(arr2[j])) return 1;
+            else if(Integer.valueOf(arr1[i])<Integer.valueOf(arr2[j])) return -1;
         }
-        while(smallest<ver2.length){
-            if(Integer.parseInt(ver2[smallest])>0){
-                return -1;
-                
-            }smallest++;
+        while(i<arr1.length){
+            if(Integer.valueOf(arr1[i++])!=0) return 1;
+        }
+        while(j<arr2.length){
+            if(Integer.valueOf(arr2[j++])!=0) return -1;
         }
         return 0;
-        
+
     }
 }
