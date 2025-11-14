@@ -10,10 +10,11 @@ class Solution {
         }if(sorted) return ans;
         int boundary=arr.length-1;
         
+        int max=arr.length;
         while(boundary!=0){
-            int end=0;int max=-1;
+            int end=0;
             for(int i=0;i<=boundary;i++){
-                if(arr[i]>max) {max=arr[i];end=i;}
+                if(arr[i]==max) {max--;end=i;break;}
             }
             reverse(arr,end);reverse(arr,boundary);
             ans.add(end+1);ans.add(boundary+1);
