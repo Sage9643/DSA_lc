@@ -6,9 +6,8 @@ class Solution {
 
         for(int num:nums){
             sum+=num;
-            long r=((sum%k)+k)%k;
-            totcnt+=map.getOrDefault(r,0);
-            map.put(r,map.getOrDefault(r,0)+1);
+            totcnt+=map.getOrDefault(sum%k,0);
+            map.put(sum%k,map.getOrDefault(sum%k,0)+1);
         }
         int i=0;long duplicates=0;
         while(i<nums.length){
