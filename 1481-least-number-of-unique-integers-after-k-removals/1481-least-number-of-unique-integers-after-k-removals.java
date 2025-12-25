@@ -3,19 +3,22 @@ class Solution {
         HashMap<Integer,Integer> map=new HashMap<>();
         for(int a:arr) map.put(a,map.getOrDefault(a,0)+1);
 
-        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->{
-            return a[1]-b[1];
-        });
+        int freq[]=new int[arr.length+1];
 
-        for(int key:map.keySet()) pq.add(new int[]{key,map.get(key)});
-        int cnt=pq.size();
+        for(int v:map.keySet()){
+            freq[map.get(v)]++;
+        }
+        int cnt=map.size();
 
-        while(k>0 && !pq.isEmpty()){
-            int a[]=pq.remove();
-            if(k<a[1]) return cnt;
-            else{
-                cnt--;k-=a[1];
+        for(int i=1;i<freq.length;i++){
+            if(freq[i]!=0){
+                if(k>=freq[i]*i){
+                    k-=freq[i]*i;
+                    cnt-=freq[i];
+                }
+                else return cnt-(k/i);
             }
         }return cnt;
+        
     }
 }
