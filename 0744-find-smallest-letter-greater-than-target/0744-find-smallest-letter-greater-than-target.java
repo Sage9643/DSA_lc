@@ -1,6 +1,5 @@
 class Solution {
     public char nextGreatestLetter(char[] letters, char target) {
-        HashSet<Character> set=new HashSet<>();
         char ch='{';
 
         for(char c:letters){
