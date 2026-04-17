@@ -1,11 +1,10 @@
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> ans=new ArrayList<>();
+        Arrays.sort(nums);
         boolean[] vis=new boolean[nums.length];
 
         backtrack(nums,vis,new ArrayList<>(),ans);
-        HashSet<List<Integer>> set=new HashSet<>(ans);
-        ans=new ArrayList<>(set);
 
         return ans;
     }
@@ -14,6 +13,7 @@ class Solution {
 
         for(int i=0;i<nums.length;i++){
             if(vis[i]) continue;
+            if(i>0 && nums[i]==nums[i-1] && !vis[i-1]) continue;
             vis[i]=true;
             arr.add(nums[i]);
             backtrack(nums,vis,arr,ans);
