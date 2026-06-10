@@ -37,7 +37,7 @@ class Solution {
             par[parb]=para;
             rank[para]++;
         }
-        else if(rank[para]==rank[parb]) par[para]=parb;
+        else if(rank[para]<rank[parb]) par[para]=parb;
         else par[parb]=para;
     }
 }
