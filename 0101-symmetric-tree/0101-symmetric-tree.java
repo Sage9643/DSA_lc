@@ -15,34 +15,16 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        ArrayList<Integer> right=new ArrayList<>();
-        dfsRight(root,right);
-        ArrayList<Integer> left=new ArrayList<>();
-        dfsLeft(root,left);
-
-        for(int i=0;i<left.size();i++){
-            if(left.get(i)!=right.get(i)) return false;
-        }
-        return true;
+        if(root==null) return true;
+        return Symmetric(root.left,root.right);
     }
-    public static void dfsRight(TreeNode root,ArrayList<Integer> arr){
-        if(root==null){
-            arr.add(-1);
-            return;
-        }
-        arr.add(root.val);
+    public static boolean Symmetric(TreeNode left,TreeNode right){
+        if(left==null && right==null) return true;
+        if(left==null || right==null) return false;
 
-        dfsRight(root.right,arr);
-        dfsRight(root.left,arr);
-    }
-    public static void dfsLeft(TreeNode root,ArrayList<Integer> arr){
-        if(root==null){
-            arr.add(-1);
-            return;
-        }
-        arr.add(root.val);
+        if(left.val!=right.val) return false;
 
-        dfsLeft(root.left,arr);
-        dfsLeft(root.right,arr);
+        return Symmetric(left.left,right.right) && Symmetric(left.right,right.left);
     }
+    
 }
