@@ -14,17 +14,24 @@
  * }
  */
 class Solution {
+    static int el;
+    static int cnt;
     public int kthSmallest(TreeNode root, int k) {
-        ArrayList<Integer> ans=new ArrayList<>();
-        Queue<TreeNode> q=new LinkedList<>();
+        el=0;cnt=0;
+        dfs(root,k);
 
-        q.add(root);
-        while(!q.isEmpty()){
-            TreeNode curr=q.remove();
-            if(curr.left!=null) q.add(curr.left);
-            if(curr.right!=null) q.add(curr.right);
-            ans.add(curr.val);
-        }Collections.sort(ans);
-        return ans.get(k-1);
+        return el;
     }
+    public static void dfs(TreeNode root,int k){
+        if(root==null) return;
+        dfs(root.left,k);
+
+        cnt++;
+        if(cnt==k){
+            el=root.val;
+            return;
+        }
+        dfs(root.right,k);
+    }
+
 }
